@@ -9,41 +9,28 @@
 class Solution {
 public:
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        vector<int> t;
-        ListNode *c = l1;
-        while(c != NULL)
-        {
-            t.push_back(c->val);
-            c = c->next;
-        }
-        c = l2;
-        while(c != NULL)
-        {
-            t.push_back(c->val);
-            c = c->next;
-        }
+        if(!l1) return l2;
+        if(!l2) return l1;
         
-        sort(t.begin(), t.end());
+        ListNode* head = new ListNode(0);
+        ListNode* cur = head;
         
-        ListNode *head = NULL;
-        ListNode *cur = NULL;
-        
-        if(t.size())
-        {
-            head = new ListNode(t[0]);                    
-            
-            cur = head;
-            
-            for(int i=1;i<t.size();i++)
+        while(l1 && l2) {
+            if(l1->val < l2->val)
             {
-                ListNode *l = new ListNode(t[i]);
-                cur->next = l;
-                cur = l;
+                cur->next = new ListNode(l1->val);
+                l1 = l1->next;
             }
+            else {
+                cur->next = new ListNode(l2->val);
+                l2 = l2->next;
+            }
+            cur = cur->next;
         }
         
-        return head;        
+        if(l1) cur->next = l1;
+        if(l2) cur->next = l2;
+        
+        return head->next;
     }
 };
