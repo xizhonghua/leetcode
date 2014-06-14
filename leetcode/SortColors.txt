@@ -1,0 +1,14 @@
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int c[3] = {0,0,0};
+        for(int i=0;i<n;i++)
+            c[A[i]]++;
+        int k = 0;
+        for(int i=0;i<3;i++)
+            for(int j=0;j<c[i];j++)
+                A[k++] = i;
+        
+    }
+};
