@@ -9,25 +9,27 @@
  */
 class Solution {
 public:
-    void s(TreeNode *root, string n, int& sum) {
-        char buf[2];
-        sprintf(buf, "%d", root->val);
-        n += string(buf);
-
-        if(!root->left && !root->right) {
-            int v = atoi(n.c_str());
-            sum += v;
-        }
-        if(root->left) s(root->left, n, sum);
-        if(root->right) s(root->right, n, sum);
+    int sumNumbers(TreeNode *root) {
+        int sum = 0;
+        dfs(root, "", sum);
+        return sum;
     }
     
-    int sumNumbers(TreeNode *root) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        int sum = 0;
-        if(root) s(root, "", sum);
-        
-        return sum;
+    void dfs(TreeNode *root, string s, int& sum) {
+        if(!root) return;
+        stringstream ss;
+        ss << root->val;
+        s += ss.str();
+        if(!root->left && !root->right)
+        {
+            ss.str(s);
+            int path_sum;
+            ss >> path_sum;
+            sum += path_sum;
+        }
+        else{
+            dfs(root->left, s, sum);
+            dfs(root->right, s, sum);
+        }
     }
 };

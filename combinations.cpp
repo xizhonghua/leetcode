@@ -1,27 +1,19 @@
 class Solution {
 public:
-    void comb(int n, int k, int d, int s, vector<vector<int> >& c, vector<int>& t)
-    {
-        if(d == k)
-        {
-            c.push_back(t);
-            return;
-        }
-        
-        for(int i=s+1;i<=n;i++)
-        {
-            t.push_back(i);
-            comb(n, k, d+1, i, c, t);
-            t.pop_back();
-        }
-    }
-    
     vector<vector<int> > combine(int n, int k) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        vector<vector<int> > c;
-        vector<int> t;
-        comb(n, k, 0, 0, c, t);
-        return c;
+        vector<vector<int> > ans;
+        vector<int> cur;
+        dfs(0,1,n,k,cur,ans);
+        return ans;
+    }
+private:
+    void dfs(int d, int s, int n, int k, vector<int>& cur, vector<vector<int> >& ans) {
+        if(d==k) { ans.push_back(cur); return;}
+        for(int i=s;i<=n;i++)
+        {
+            cur.push_back(i);
+            dfs(d+1,i+1,n,k,cur,ans);
+            cur.pop_back();
+        }
     }
 };

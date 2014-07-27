@@ -1,42 +1,47 @@
+// 0 minutes ago	Accepted	 56 ms	cpp
 class Solution {
 public:
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        int l = 0, r = matrix.size()-1;
+        size_t rows = matrix.size();
+        if(rows == 0) return false;
+        size_t cols = matrix[0].size();
+        int t = 0, d = rows - 1;
+        int l = 0, r = cols - 1;
         
-        int p;
-        
-        while(true)
+        while(t<d)
         {
-            p = (l+r)/2;
-            
-            int t = matrix[p][0];
-             
-            if(r-l<=1)
+            size_t mid_row = (t+d)/2;
+            if (target < matrix[mid_row][0])
             {
-                p = t > target ? r : l;
-                break;
+                d = mid_row-1;
             }
-                    
-            
-            if(t > target)
-                r = p;
+            else if (target > matrix[mid_row][cols-1])
+            {
+                t = mid_row+1;
+            }
             else
-                l = p;
+            {
+                t = d = mid_row;
+            }
         }
         
-        for(int i=0;i<matrix[p].size();i++)
-        {
-            if(matrix[p][i] == target) return true;
-        }
+        size_t row = t;
         
-        if(p<matrix.size()-1)
+        while(l<=r)
         {
-            for(int i=0;i<matrix[p+1].size();i++)
-        {
-            if(matrix[p+1][i] == target) return true;
-        } 
+            size_t mid_col = (l+r)/2;
+            if (target == matrix[row][mid_col])
+            {
+                return true;
+            }
+            else if (target > matrix[row][mid_col])
+            {
+                l = mid_col+1;
+            }
+            else
+            {
+                r = mid_col-1;
+            }
         }
         
         return false;

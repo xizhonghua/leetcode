@@ -9,23 +9,30 @@
  */
 class Solution {
 public:
-    vector<vector<int> > ans;
-    void dfs(TreeNode *root, int sum, vector<int> path) {
-        path.push_back(root->val);
-        if(!root->left && !root->right)
-        {
-            if(sum-root->val == 0) ans.push_back(path);
-            return;
-        }        
-        if(root->left) dfs(root->left, sum-(root->val), path);
-        if(root->right) dfs(root->right, sum-(root->val), path);        
-    }
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        ans.clear();
         vector<int> path;
-        if(root) dfs(root, sum, path);
+        vector<vector<int> > ans;
+        dfs(root, sum, path, ans);
         return ans;
+    }
+private:
+    void dfs(TreeNode *root, int sum, vector<int>& path, vector<vector<int> >&ans) {
+        if(!root) return;
+        
+        path.push_back(root->val);
+        
+        int left = sum - root->val;
+        
+        if(root->left || root->right)
+        {
+            dfs(root->left, left, path, ans);
+            dfs(root->right, left, path, ans);
+        }
+        else {
+            if(left == 0) ans.push_back(path);
+        }
+        path.pop_back();
+        
+        
     }
 };
