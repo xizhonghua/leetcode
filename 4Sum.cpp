@@ -1,8 +1,6 @@
 class Solution {
 public:
     vector<vector<int> > fourSum(vector<int> &num, int target) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
         vector<vector<int> > ans;
         set<vector<int> > h;
         vector<int> l;
@@ -11,6 +9,9 @@ public:
         
         
         int n = num.size();
+        
+        if(target > 0 && target > 4*num[n-1]) return ans;
+        if(target < 0 && target < 4*num[0]) return ans;
         
         for(int i=0;i<n;i++)
         {   
@@ -21,16 +22,11 @@ public:
                     int t = target - num[i] - num[j] - num[k];
                     
                     if(t < num[k]) continue;
-                    
                    
                     if(!std::binary_search(num.begin()+k+1, num.end(), t)) continue;                                       
                     
             
-                    vector<int> a;
-                    a.push_back(num[i]);
-                    a.push_back(num[j]);
-                    a.push_back(num[k]);
-                    a.push_back(t);
+                    auto a = vector<int>{num[i], num[j], num[k], t};
                     
                     if(!h.count(a))                    
                     {
