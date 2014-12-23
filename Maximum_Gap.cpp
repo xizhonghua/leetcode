@@ -19,7 +19,7 @@ private:
             array<vector<int>, base> buckets;
             for(const auto n : num) buckets[ (n / e) % base ].push_back(n);
             auto iter = num.begin();
-            for(auto &bucket : buckets)
+            for(const auto &bucket : buckets)
                 for(const auto b : bucket) *(iter++) = b;
         }
     }
