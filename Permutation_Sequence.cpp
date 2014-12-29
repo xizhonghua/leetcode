@@ -10,10 +10,9 @@ public:
         
         string s;
         k--;
-        while(n>0) {
-            int d = k / fact[n-1];
-            k %= fact[n-1];
-            n--;
+        while(n--) {
+            int d = k / fact[n];
+            k %= fact[n];
             s += num[d];
             for(int i=d;i<=8;i++)
                 num[i] = num[i+1];
