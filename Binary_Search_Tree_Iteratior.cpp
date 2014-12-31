@@ -28,11 +28,13 @@ public:
                 m_root=m_root->left;
             }
         }
+        
         int val = m_root->val;
+        m_set.erase(m_root);
+        
         if(m_root->right) {
             m_root = m_root->right;
         } else {
-            m_set.erase(m_root);
             m_root = m_stack.top();
             m_stack.pop();
         }
