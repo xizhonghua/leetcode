@@ -21,23 +21,27 @@ public:
 
     /** @return the next smallest number */
     int next() {
-        while(m_root->left) {
-            m_stack.push(m_root);
-            m_root=m_root->left;
+        if(!m_set.count(m_root)) {
+            while(m_root->left) {
+                m_stack.push(m_root);
+                m_set.insert(m_root);
+                m_root=m_root->left;
+            }
         }
         int val = m_root->val;
         if(m_root->right) {
             m_root = m_root->right;
         } else {
+            m_set.erase(m_root);
             m_root = m_stack.top();
             m_stack.pop();
-            if(m_root) m_root->left = nullptr;
         }
         return val;
     }
 private:
     TreeNode *m_root;
     stack<TreeNode*> m_stack;
+    unordered_set<TreeNode*> m_set;
 };
 
 /**
