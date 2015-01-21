@@ -17,7 +17,10 @@
 -- | 1  | IT       |
 -- | 2  | Sales    |
 -- +----+----------+
--- Write a SQL query to find employees who have the highest salary in each of the departments. For the above tables, Max has the highest salary in the IT department and Henry has the highest salary in the Sales department.
+
+-- Write a SQL query to find employees who have the highest salary in each of the departments. 
+-- For the above tables, Max has the highest salary in the IT department and Henry has the 
+-- highest salary in the Sales department.
 
 -- +------------+----------+--------+
 -- | Department | Employee | Salary |
