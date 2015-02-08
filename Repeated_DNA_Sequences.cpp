@@ -5,7 +5,11 @@ public:
         auto l = s.length();
         if(l<=10) return {};
         
-        unordered_map<char, int> km = {{'A', 0}, {'C', 1}, {'G', 2}, {'T', 3}};
+        array<int, 256> km;
+        km['A'] = 0;
+        km['C'] = 1;
+        km['G'] = 2;
+        km['T'] = 3; 
 
         const auto mask = (1<<20)-1;
         auto key = 0;
